@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Icon, Avatar } from 'antd'
 import { Link } from 'dva/router'
-import { SideMenu } from './SideMenu'
+import SideMenu from './SideMenu'
 
 class Layout extends  Component {
   constructor(props) {

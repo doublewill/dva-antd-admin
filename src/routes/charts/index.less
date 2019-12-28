@@ -1,0 +1,21 @@
+:global {
+  .chart-container {
+    display: flex;
+    &-type, .ant-menu-root.ant-menu-inline {
+      height: 100%;
+    }
+    &-content {
+     flex: 1;
+     animation: chart 3s linear forwards;
+   }
+
+   @keyframes chart {
+    0% {
+      opacity: 0;
+    }
+    100% {
+     opacity: 0;
+   }
+  }
+ }
+}
