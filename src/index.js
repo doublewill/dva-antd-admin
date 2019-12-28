@@ -1,9 +1,11 @@
 import dva from 'dva'
 import 'antd/dist/antd.less'
 import './index.less'
-
+import { createBrowserHistory as createHistory } from 'history'
 // 1. Initialize
-const app = dva()
+const app = dva({
+  history: createHistory()
+})
 
 // 2. Plugins
 // app.use({});
