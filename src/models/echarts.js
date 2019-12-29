@@ -1,9 +1,11 @@
+import modelExtend from 'dva-model-extend'
+import { pageModel } from './common'
 
-export default {
-
-  namespace: 'example',
-
-  state: {},
+export default modelExtend(pageModel, {
+  namespace: 'echarts',
+  state: {
+    page:1
+  },
 
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
@@ -21,5 +23,4 @@ export default {
       return { ...state, ...action.payload };
     },
   },
-
-};
+});

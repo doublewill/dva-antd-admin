@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Row, Icon, Col, Table, List, Avatar, Statistic, Card } from 'antd'
+import { connect } from 'dva'
 import BaseCharts from '../../components/BaseCharts'
 import PianoCharts from './PianoCharts'
 import RadarCharts from './RadarCharts'
@@ -45,8 +46,7 @@ class Dashboard extends Component {
    
   render() {
     const { columns } = this.state
-
-    const { statistics = [], userList = [], articleList = [] } = {}
+    const { statistics = [], userList = [], articleList = [] } = this.props.app
     const pagination = {
       showSizeChanger: false,
       showQuickJumper: false,
@@ -118,4 +118,4 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard
+export default connect(app=> app)(Dashboard)

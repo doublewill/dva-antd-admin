@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Table } from 'antd'
+import { connect } from 'dva'
 class TableHome extends Component {
   constructor(props) {
     super(props)
@@ -50,7 +51,7 @@ class TableHome extends Component {
    
   render() {
     const { columns } = this.state
-    const { records = [] } = {}
+    const { records = [] } = this.props.table
     const pagination = {
       showSizeChanger: true,
       showQuickJumper: true,
@@ -64,4 +65,4 @@ class TableHome extends Component {
   }
 }
 
-export default TableHome
+export default connect((table)=> table)(TableHome)
