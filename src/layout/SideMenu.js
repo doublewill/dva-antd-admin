@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'dva/router'
-import { Menu, Icon, SubMenu } from 'antd'
+import { Menu, Icon } from 'antd'
 const MenuItem = Menu.Item
-
+const { SubMenu }= Menu
 class SideMenu extends Component {
   constructor(props) {
     super(props)
@@ -28,10 +28,29 @@ class SideMenu extends Component {
           <Icon type="pie-chart" />
           <Link to='/table'>表格</Link>
         </MenuItem>
-        <MenuItem key="3">
-          <Icon type="appstore" />
-          <Link to='/echarts'>Echarts</Link>
-        </MenuItem>
+
+        <SubMenu
+          key="3"
+          title={
+            <span>
+              <Icon type="appstore" />
+              <span>图表</span>
+            </span>
+          }
+        >
+          <MenuItem key="4">
+            <Link to='/echarts'>Echarts</Link>
+          </MenuItem>
+          <MenuItem key="5">
+            <Link to='/d3-charts'>D3-echarts</Link>
+          </MenuItem>
+          <MenuItem key="6">
+            <Link to='/three-charts'>Three-echarts</Link>
+          </MenuItem>
+          <MenuItem key="7">
+            <Link to='/g2-charts'>G2-echarts</Link>
+          </MenuItem>
+        </SubMenu> 
       </Menu>
     )
   }
