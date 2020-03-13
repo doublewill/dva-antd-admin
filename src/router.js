@@ -55,16 +55,16 @@ function RouterConfig({ history, app }) {
   return (
     <Router history={history}>
       <Layout>
-        <Switch> 
+        <Switch>
           <Route path="/" exact>
             <Redirect to="/dashboard" />
           </Route>
           <Route path="/dashboard" exact component={Dashboard} />
           <Route path="/table" exact component={Table} />
           <Route path="/echarts" exact component={Echarts} />
-          <Route path="/d3-charts" exact component={D3Charts} />          
+          <Route path="/d3-charts" exact component={D3Charts} />
           <Route path="/g2-charts" exact component={G2Charts} />
-          <Route path="/three-charts" exact component={ThreeCharts} />                    
+          <Route path="/three-charts" exact component={ThreeCharts} />
         </Switch>
       </Layout>
     </Router>

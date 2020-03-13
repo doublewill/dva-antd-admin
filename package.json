@@ -7,16 +7,17 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@antv/g2": "^3.5.11",
     "antd": "^3.26.4",
-    "babel-polyfill": "^6.26.0",    
+    "babel-polyfill": "^6.26.0",
     "dva": "^2.4.1",
     "echarts": "^4.5.0",
     "echarts-for-react": "^2.0.15-beta.1",
     "history": "^4.10.1",
-    "mockjs": "^1.1.0",    
+    "mockjs": "^1.1.0",
     "react": "^16.2.0",
-    "react-excel-workbook": "^0.0.4",    
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-excel-workbook": "^0.0.4"
   },
   "devDependencies": {
     "babel-plugin-dva-hmr": "^0.3.2",

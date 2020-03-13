@@ -1,65 +1,44 @@
-const setLineOption =()=> {
-  return {
-    title: {
-      text: '折线图堆叠'
-    },
-    tooltip: {
-      trigger: 'axis'
-    },
-    legend: {
-      data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
-    },
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true
-    },
-    toolbox: {
-      feature: {
-        saveAsImage: {}
-      }
-    },
-    xAxis: {
-      type: 'category',
-      boundaryGap: false,
-      data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-    },
-    yAxis: {
-      type: 'value'
-    },
-    series: [
-      {
-        name: '邮件营销',
-        type: 'line',
-        stack: '总量',
-        data: [120, 132, 101, 134, 90, 230, 210]
-      },
-      {
-        name: '联盟广告',
-        type: 'line',
-        stack: '总量',
-        data: [220, 182, 191, 234, 290, 330, 310]
-      },
-      {
-        name: '视频广告',
-        type: 'line',
-        stack: '总量',
-        data: [150, 232, 201, 154, 190, 330, 410]
-      },
-      {
-        name: '直接访问',
-        type: 'line',
-        stack: '总量',
-        data: [320, 332, 301, 334, 390, 330, 320]
-      },
-      {
-        name: '搜索引擎',
-        type: 'line',
-        stack: '总量',
-        data: [820, 932, 901, 934, 1290, 1330, 1320]
-      }
-    ]
-  }
+import G2 from '@antv/g2'
+const data = [
+  { year: '1991', value: 3 },
+  { year: '1992', value: 4 },
+  { year: '1993', value: 3.5 },
+  { year: '1994', value: 5 },
+  { year: '1995', value: 4.9 },
+  { year: '1996', value: 6 },
+  { year: '1997', value: 7 },
+  { year: '1998', value: 9 },
+  { year: '1999', value: 13 }
+]
+const setLine = (option)=> {
+  const chart = new G2.Chart({
+    container: option.el,
+    width: option.width || 600,
+    height: option.height || 300,
+    forceFit: true
+  })
+
+  chart.source(data)
+
+  chart.scale('value', {
+    min: 0
+  })
+  chart.scale('year', {
+    range: [ 0, 1 ]
+  })
+  chart.tooltip({
+    crosshairs: {
+      type: 'line'
+    }
+  })
+  chart.line().position('year*value')
+  chart.point().position('year*value')
+    .size(4)
+    .shape('circle')
+    .style({
+      stroke: '#fff',
+      lineWidth: 1
+    })
+  chart.render()
 }
-export default setLineOption
+export default setLine

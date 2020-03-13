@@ -1,14 +1,9 @@
 import React, { Component } from 'react'
 import { Menu } from 'antd'
 
-import BaseCharts from '../../components/BaseCharts'
-import setRadarOption from './modules/echarts/radar'
-import setLineOption from './modules/echarts/line'
-import setAreaOption from './modules/echarts/area'
-import setBarOption from './modules/echarts/bar'
-import setPieOption from './modules/echarts/pie'
-import setFunnelOption from './modules/echarts/funnel'
 import './index.less'
+import DrawG2 from './modules/g2/draw'
+import setLine from './modules/g2/line'
 
 class G2Charts extends Component {
   constructor(props) {
@@ -19,17 +14,40 @@ class G2Charts extends Component {
     }
   }
 
-  handleChartHeight = () => {
+  handleChartHeight = (callback) => {
+    const chartHeight = document.body.clientHeight - 105
     this.setState({
-      chartHeight: document.body.clientHeight - 105
-    })
+      chartHeight
+    }, callback && callback(chartHeight))
   }
 
   componentDidMount() {
     window.addEventListener('resize', () => {
       this.handleChartHeight()
     })
-    this.handleChartHeight()
+    this.handleChartHeight((chartHeight) => {
+      const data = [
+        { genre: 'Sports', sold: 275 },
+        { genre: 'Strategy', sold: 115 },
+        { genre: 'Action', sold: 120 },
+        { genre: 'Shooter', sold: 350 },
+        { genre: 'Other', sold: 150 },
+      ]
+      let rect = document.getElementsByClassName('chart-container-content')[0]
+      let width = rect.getBoundingClientRect().width
+      setLine({
+        el: 'js-line',
+        height: chartHeight,
+        width,
+      })
+
+      new DrawG2({
+        el: 'c1',
+        height: chartHeight,
+        width,
+        data
+      })
+    })
   }
 
   handleClick = ({ item, key, keyPath, domEvent }) => {
@@ -40,6 +58,7 @@ class G2Charts extends Component {
       chartType = "line",
       chartHeight = 300
     } = this.state
+
     return (
       <div
         className="chart-container"
@@ -52,7 +71,7 @@ class G2Charts extends Component {
             style={{
               width: 150
             }}
-            defaultSelectedKeys={['line']}
+            defaultSelectedKeys={['bar']}
             defaultOpenKeys={['sub1']}
             mode="inline">
             <Menu.Item key="line">折线图</Menu.Item>
@@ -65,12 +84,8 @@ class G2Charts extends Component {
           </Menu>
         </div>
         <div className="chart-container-content">
-          {chartType === 'line' && <BaseCharts option={setLineOption()} />}
-          {chartType === 'area' && <BaseCharts option={setAreaOption()} />}
-          {chartType === 'radar' && <BaseCharts option={setRadarOption()} />}
-          {chartType === 'bar' && <BaseCharts option={setBarOption()} />}
-          {chartType === 'pie' && <BaseCharts option={setPieOption()} />}
-          {chartType === 'funnel' && <BaseCharts option={setFunnelOption()} />}
+         <div className='chart-g2-ele' style={{display: chartType === "bar" ? "block" : "none" }} id="c1"></div>
+         <div className='chart-g2-ele' style={{display: chartType === "line" ? "block" : "none" }} id="js-line"></div>
         </div>
       </div>
     )
